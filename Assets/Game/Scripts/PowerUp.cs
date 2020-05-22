@@ -6,8 +6,8 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.0f;
-    [SerializeField] //0 tripleshot, 1 speed, 2
+    private float _speed = 1.0f;
+    [SerializeField] //0 tripleshot, 1 speed, 2 shield
     private int _powerupId = 0; 
 
     // Start is called before the first frame update
@@ -43,6 +43,9 @@ public class PowerUp : MonoBehaviour
                 }else if (_powerupId == 1)
                 {
                     player.SpeedPowerUpOn();
+                }else if (_powerupId == 2)
+                {
+                    player.ShieldPowerUpOn();
                 }
                 
             }

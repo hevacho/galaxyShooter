@@ -25,6 +25,10 @@ public class Player : MonoBehaviour
     private float _nextFire = 0.0f;
     public bool isTripleShootActive;
     public bool isSpeedBootActive;
+    public bool isShieldActive;
+
+    [SerializeField]
+    private GameObject _shieldsGO;
 
     
 
@@ -32,7 +36,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(0, LIMIT_SHIP_Y);
-
     }
 
     // Update is called once per frame
@@ -110,13 +113,34 @@ public class Player : MonoBehaviour
         isSpeedBootActive = false;
     }
 
+    public void ShieldPowerUpOn()
+    {
+        isShieldActive = true;
+        _shieldsGO.SetActive(true);
+    }
+
     public void Damage()
     {
+
+        if (isShieldActive)
+        {
+            isShieldActive = false;
+            _shieldsGO.SetActive(false);
+        }
+        else
+        {
+            lives--;
+        }
         
-        if (--lives <= 0)
+        if (lives <= 0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+    }
+
+    public bool isAlive()
+    {
+        return lives > 0;
     }
 }

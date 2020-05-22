@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Random.InitState(42);
+        Random.InitState(666);
         animator = GetComponent<Animator>();
     }
 
