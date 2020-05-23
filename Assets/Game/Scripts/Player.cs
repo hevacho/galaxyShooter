@@ -32,7 +32,10 @@ public class Player : MonoBehaviour
 
     private UIManager _uIManager;
     private GameManager _gameManager;
+    private AudioSource _audioSource;
 
+    [SerializeField]
+    private AudioClip _audioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, LIMIT_SHIP_Y);
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
 
         if (_uIManager != null)
         {
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour
             {
                 Instantiate(_laserPrefaf, new Vector3(transform.position.x, transform.position.y + 0.95f, 0), Quaternion.identity);
             }
+            _audioSource.Play();
         }
     }
 
@@ -146,6 +151,7 @@ public class Player : MonoBehaviour
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             _gameManager.GameOver();
+            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position);
             Destroy(gameObject);
         }
     }

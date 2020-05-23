@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5972289687728635652}
   - component: {fileID: 5972289687728635650}
   - component: {fileID: 5972289687728635651}
+  - component: {fileID: 6603554986700533911}
   m_Layer: 0
   m_Name: TripleShot
   m_TagString: Untagged
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _powerupId: 0
+  _audioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!58 &5972289687728635651
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -113,3 +115,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.15114148}
   serializedVersion: 2
   m_Radius: 1.3886483
+--- !u!95 &6603554986700533911
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972289687728635655}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8188b4b0a2131034dba978b2d9d17cb1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

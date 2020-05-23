@@ -14,10 +14,12 @@ public class EnemyAI : MonoBehaviour
     private UIManager _uIManager;
     private GameManager _gameManager;
 
+    [SerializeField]
+    private AudioClip _audioClip;
+
     // Start is called before the first frame update
     void Start()
     {
-        Random.InitState(666);
         animator = GetComponent<Animator>();
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
@@ -63,13 +65,15 @@ public class EnemyAI : MonoBehaviour
 
             }
             _uIManager.UpdateScore(5);
-            Instantiate(enemyExplosionPrefaf, transform.position, Quaternion.identity);
+            Destroy(Instantiate(enemyExplosionPrefaf, transform.position, Quaternion.identity), 10);
+            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position);
             Destroy(this.gameObject);
         }else if (collision.CompareTag("Laser"))
         {
             _uIManager.UpdateScore(10);
             Destroy(collision.gameObject);
             Destroy(Instantiate(enemyExplosionPrefaf, transform.position, Quaternion.identity), 10);
+            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position);
             Destroy(this.gameObject);
 
         }

@@ -124,3 +124,4 @@ MonoBehaviour:
   speed: 3
   enemyExplosionPrefaf: {fileID: 4650466519204298814, guid: 9d86f54970f6b664886bf1098fa9be00,
     type: 3}
+  _audioClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}

@@ -12,7 +12,8 @@ public class PowerUp : MonoBehaviour
 
     private GameManager _gameManager;
 
-    
+    [SerializeField]
+    private AudioClip _audioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,7 @@ public class PowerUp : MonoBehaviour
                 }
                 
             }
+            AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position);
             Destroy(this.gameObject);
         }
     }

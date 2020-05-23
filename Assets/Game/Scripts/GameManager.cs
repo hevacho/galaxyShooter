@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Random.InitState(666);
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
