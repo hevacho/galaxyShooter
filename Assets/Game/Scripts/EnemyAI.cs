@@ -11,16 +11,32 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private GameObject enemyExplosionPrefaf;
 
+    private UIManager _uIManager;
+    private GameManager _gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         Random.InitState(666);
         animator = GetComponent<Animator>();
+        _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if (_uIManager != null)
+        {
+            _uIManager.UpdateScore(0);
+        }
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_gameManager.isGameOver())
+        {
+            Destroy(gameObject);
+        }
+
         transform.Translate(Vector3.down * speed * Time.deltaTime);
         if(transform.position.y < -7)
         {
@@ -46,12 +62,14 @@ public class EnemyAI : MonoBehaviour
                 player.Damage();
 
             }
+            _uIManager.UpdateScore(5);
             Instantiate(enemyExplosionPrefaf, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }else if (collision.CompareTag("Laser"))
         {
+            _uIManager.UpdateScore(10);
             Destroy(collision.gameObject);
-            Instantiate(enemyExplosionPrefaf, transform.position, Quaternion.identity);
+            Destroy(Instantiate(enemyExplosionPrefaf, transform.position, Quaternion.identity), 10);
             Destroy(this.gameObject);
 
         }

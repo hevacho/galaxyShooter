@@ -8,17 +8,26 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private float _speed = 1.0f;
     [SerializeField] //0 tripleshot, 1 speed, 2 shield
-    private int _powerupId = 0; 
+    private int _powerupId = 0;
+
+    private GameManager _gameManager;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_gameManager.isGameOver())
+        {
+            Destroy(gameObject);
+        }
+
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
         if(transform.position.y < -7)

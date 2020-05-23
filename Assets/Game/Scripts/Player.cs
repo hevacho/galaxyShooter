@@ -30,12 +30,22 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _shieldsGO;
 
-    
+    private UIManager _uIManager;
+    private GameManager _gameManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, LIMIT_SHIP_Y);
+        _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        if (_uIManager != null)
+        {
+            _uIManager.UpdateLives(lives);
+        }
+
     }
 
     // Update is called once per frame
@@ -129,18 +139,15 @@ public class Player : MonoBehaviour
         }
         else
         {
-            lives--;
+            _uIManager.UpdateLives(--lives);
         }
         
         if (lives <= 0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            _gameManager.GameOver();
             Destroy(gameObject);
         }
     }
 
-    public bool isAlive()
-    {
-        return lives > 0;
-    }
 }
