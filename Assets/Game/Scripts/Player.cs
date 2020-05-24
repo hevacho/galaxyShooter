@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _audioClip;
 
+    [SerializeField]
+    private GameObject[] _engine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -145,6 +148,7 @@ public class Player : MonoBehaviour
         else
         {
             _uIManager.UpdateLives(--lives);
+                        
         }
         
         if (lives <= 0)
@@ -153,6 +157,10 @@ public class Player : MonoBehaviour
             _gameManager.GameOver();
             AudioSource.PlayClipAtPoint(_audioClip, Camera.main.transform.position);
             Destroy(gameObject);
+        }
+        else if(lives<3)
+        {
+            _engine[lives-1].SetActive(true);
         }
     }
 
